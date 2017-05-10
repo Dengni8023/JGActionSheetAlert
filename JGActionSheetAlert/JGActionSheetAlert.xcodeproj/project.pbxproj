@@ -7,16 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D4BBAA8B1EC4442B00699D9C /* JGActionSheetAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = D4BBAA8A1EC4442B00699D9C /* JGActionSheetAlert.m */; };
 		D4E56BF01EC2BA8F00061C7F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D4E56BEF1EC2BA8F00061C7F /* main.m */; };
 		D4E56BF31EC2BA8F00061C7F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D4E56BF21EC2BA8F00061C7F /* AppDelegate.m */; };
 		D4E56BF91EC2BA8F00061C7F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4E56BF71EC2BA8F00061C7F /* Main.storyboard */; };
 		D4E56BFB1EC2BA8F00061C7F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4E56BFA1EC2BA8F00061C7F /* Assets.xcassets */; };
-		D4E56C091EC2BB2200061C7F /* JGActionSheetAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = D4E56C081EC2BB2200061C7F /* JGActionSheetAlert.m */; };
 		D4E56C0C1EC2BCE000061C7F /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4E56C0A1EC2BCE000061C7F /* Launch Screen.storyboard */; };
 		D4E56C0F1EC2BDB600061C7F /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4E56C0E1EC2BDB600061C7F /* TableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D4BBAA891EC4442B00699D9C /* JGActionSheetAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGActionSheetAlert.h; sourceTree = "<group>"; };
+		D4BBAA8A1EC4442B00699D9C /* JGActionSheetAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGActionSheetAlert.m; sourceTree = "<group>"; };
 		D4E56BEB1EC2BA8F00061C7F /* JGActionSheetAlert.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JGActionSheetAlert.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4E56BEF1EC2BA8F00061C7F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D4E56BF11EC2BA8F00061C7F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -24,8 +26,6 @@
 		D4E56BF81EC2BA8F00061C7F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D4E56BFA1EC2BA8F00061C7F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D4E56BFF1EC2BA8F00061C7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D4E56C071EC2BB2200061C7F /* JGActionSheetAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGActionSheetAlert.h; sourceTree = "<group>"; };
-		D4E56C081EC2BB2200061C7F /* JGActionSheetAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGActionSheetAlert.m; sourceTree = "<group>"; };
 		D4E56C0B1EC2BCE000061C7F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/Launch Screen.storyboard"; sourceTree = "<group>"; };
 		D4E56C0D1EC2BDB600061C7F /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
 		D4E56C0E1EC2BDB600061C7F /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
@@ -42,6 +42,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D4BBAA881EC4442B00699D9C /* SourceFiles */ = {
+			isa = PBXGroup;
+			children = (
+				D4BBAA891EC4442B00699D9C /* JGActionSheetAlert.h */,
+				D4BBAA8A1EC4442B00699D9C /* JGActionSheetAlert.m */,
+			);
+			name = SourceFiles;
+			path = ../../SourceFiles;
+			sourceTree = "<group>";
+		};
 		D4E56BE21EC2BA8E00061C7F = {
 			isa = PBXGroup;
 			children = (
@@ -61,7 +71,7 @@
 		D4E56BED1EC2BA8F00061C7F /* JGActionSheetAlert */ = {
 			isa = PBXGroup;
 			children = (
-				D4E56C061EC2BAE000061C7F /* JGActionSheetAlert */,
+				D4BBAA881EC4442B00699D9C /* SourceFiles */,
 				D4E56C051EC2BAE000061C7F /* Classes */,
 				D4E56BF11EC2BA8F00061C7F /* AppDelegate.h */,
 				D4E56BF21EC2BA8F00061C7F /* AppDelegate.m */,
@@ -89,15 +99,6 @@
 			children = (
 			);
 			path = Classes;
-			sourceTree = "<group>";
-		};
-		D4E56C061EC2BAE000061C7F /* JGActionSheetAlert */ = {
-			isa = PBXGroup;
-			children = (
-				D4E56C071EC2BB2200061C7F /* JGActionSheetAlert.h */,
-				D4E56C081EC2BB2200061C7F /* JGActionSheetAlert.m */,
-			);
-			path = JGActionSheetAlert;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -174,7 +175,7 @@
 				D4E56BF31EC2BA8F00061C7F /* AppDelegate.m in Sources */,
 				D4E56BF01EC2BA8F00061C7F /* main.m in Sources */,
 				D4E56C0F1EC2BDB600061C7F /* TableViewController.m in Sources */,
-				D4E56C091EC2BB2200061C7F /* JGActionSheetAlert.m in Sources */,
+				D4BBAA8B1EC4442B00699D9C /* JGActionSheetAlert.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,6 +336,7 @@
 				D4E56C041EC2BA8F00061C7F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

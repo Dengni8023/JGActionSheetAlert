@@ -160,7 +160,7 @@ static NSInteger const JGActionSheetAlertFirstOtherIndex = 2;
 #pragma mark - Show
 - (BOOL)hideCurrentAlertShow {
     
-    UIViewController *topVC = [[UIApplication sharedApplication] applicationTopViewController];
+    UIViewController *topVC = [self applicationTopViewController];
     if ([topVC isKindOfClass:[UIAlertController class]]) {
         
         [topVC dismissViewControllerAnimated:NO completion:^{
@@ -230,7 +230,7 @@ static NSInteger const JGActionSheetAlertFirstOtherIndex = 2;
     }
     else {
         
-        UIViewController *topVC = [[UIApplication sharedApplication] applicationTopViewControllerExcludeAlert:YES];
+        UIViewController *topVC = [self applicationTopViewControllerExcludeAlert:YES];
         if (!topVC) {
             return nil;
         }
@@ -248,7 +248,7 @@ static NSInteger const JGActionSheetAlertFirstOtherIndex = 2;
 /** Alert Actionsheet iOS8及以上系统统一处理 */
 - (UIAlertController *)showAlertWithTitle:(NSString *)title message:(NSString *)message style:(UIAlertControllerStyle)style cancel:(NSString *)cancel destructive:(NSString *)destructive others:(NSArray<NSString *> *)others action:(JGActionSheetAlertAction)action {
     
-    UIViewController *topVC = [[UIApplication sharedApplication] applicationTopViewController];
+    UIViewController *topVC = [self applicationTopViewController];
     if (!topVC) {
         return nil;
     }
@@ -313,7 +313,7 @@ static NSInteger const JGActionSheetAlertFirstOtherIndex = 2;
         
         [topVC dismissViewControllerAnimated:NO completion:^{
             
-            UIViewController *newVc = [[UIApplication sharedApplication] applicationTopViewController];
+            UIViewController *newVc = [self applicationTopViewController];
             [newVc presentViewController:alert animated:YES completion:nil];
         }];
     }
@@ -394,7 +394,7 @@ static NSInteger const JGActionSheetAlertFirstOtherIndex = 2;
 
 @end
 
-@implementation UIApplication (JGActionSheetAlert)
+@implementation JGActionSheetAlert (UIApplication)
 
 #pragma mark - Controller
 - (UIViewController *)applicationTopViewController {

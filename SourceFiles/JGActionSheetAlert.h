@@ -127,7 +127,7 @@ typedef void(^JGActionSheetAlertAction)(JGActionSheetAlert * __nonnull actionShe
 
 @end
 
-@interface UIApplication (JGActionSheetAlert)
+@interface JGActionSheetAlert (UIApplication)
 
 /**
  应用最顶层 Controller
