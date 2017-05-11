@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "JGActionSheetAlert"
-  s.version      = "0.0.2"
+  s.version      = "0.0.3"
   s.summary      = "iOS弹出ActionSheet与Alert统一封装处理."
 
   # This description is used to generate tags and improve search results.

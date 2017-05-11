@@ -30,6 +30,15 @@ typedef void(^JGActionSheetAlertAction)(JGActionSheetAlert * __nonnull actionShe
  @return 是否需要隐藏
  */
 + (BOOL)hideAlert;
+    
+/**
+ Alert 单个按钮，无点击响应
+ 
+ @param title 标题，默认“提示”
+ @param message 提示内容
+ @return UIAlertView / UIAlertController
+ */
++ (nullable id)showAlertWithTitle:(nullable NSString *)title message:(nullable NSString *)message;
 
 /**
  Alert 单个按钮，无点击响应

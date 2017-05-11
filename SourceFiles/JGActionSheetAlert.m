@@ -79,6 +79,11 @@ static NSInteger const JGActionSheetAlertFirstOtherIndex = 2;
     return [[self sharedInstance] hideCurrentAlertShow];
 }
 
++ (nullable id)showAlertWithTitle:(nullable NSString *)title message:(nullable NSString *)message {
+    
+    return [self showAlertWithTitle:title message:message cancel:nil];
+}
+
 + (id)showAlertWithTitle:(NSString *)title message:(NSString *)message cancel:(NSString *)cancel {
     
     return [self showAlertWithTitle:title message:message cancel:cancel ?: @"确定" action:nil];
