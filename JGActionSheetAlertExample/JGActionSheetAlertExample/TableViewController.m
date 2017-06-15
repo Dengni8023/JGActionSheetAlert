@@ -9,6 +9,10 @@
 #import "TableViewController.h"
 #import "JGActionSheetAlert.h"
 
+#ifndef CLog
+#define CLog(format, ...) (NSLog)((@"%s Line:%zd " format), __PRETTY_FUNCTION__, __LINE__, ## __VA_ARGS__);
+#endif
+
 @interface TableViewController ()
 
 @end
@@ -42,11 +46,11 @@ static NSString * const reuseIdentifier = @"Cell";
     
     switch (section) {
         case 0:
-            return 6;
+            return 7;
             break;
             
         case 1:
-            return 2;
+            return 3;
             break;
             
         default:
@@ -62,13 +66,14 @@ static NSString * const reuseIdentifier = @"Cell";
     switch (indexPath.section) {
         case 0: {
             
-            NSString *titles[6] = {
+            NSString *titles[7] = {
                 @"Alert",
                 @"Alert With Action",
                 @"Alert With Other",
                 @"Alert With Destructive",
                 @"Alert With Others",
                 @"Alert With Destructive And Others",
+                @"Alert With Click Alert",
             };
             
             [cell.textLabel setText:titles[indexPath.row]];
@@ -77,9 +82,10 @@ static NSString * const reuseIdentifier = @"Cell";
             
         case 1: {
             
-            NSString *titles[2] = {
+            NSString *titles[3] = {
                 @"Action Sheet",
                 @"Action Sheet With Destructive",
+                @"Action Sheet With Click Alert",
             };
             
             [cell.textLabel setText:titles[indexPath.row]];
@@ -128,7 +134,7 @@ static NSString * const reuseIdentifier = @"Cell";
                     
                     [JGActionSheetAlert showAlertWithTitle:@"Title" message:@"Message" cancel:@"Cancel" action:^(JGActionSheetAlert * _Nonnull actionSheetAlert, NSInteger actionIndex) {
                         
-                        NSLog(@"Tap button : %zd", actionIndex);
+                        CLog(@"Tap button : %zd", actionIndex);
                     }];
                 }
                     break;
@@ -137,7 +143,7 @@ static NSString * const reuseIdentifier = @"Cell";
                     
                     [JGActionSheetAlert showAlertWithTitle:@"Title" message:@"Message" cancel:@"Cancel" other:@"Other" action:^(JGActionSheetAlert * _Nonnull actionSheetAlert, NSInteger actionIndex) {
                         
-                        NSLog(@"Tap button : %zd", actionIndex);
+                        CLog(@"Tap button : %zd", actionIndex);
                     }];
                 }
                     break;
@@ -146,7 +152,7 @@ static NSString * const reuseIdentifier = @"Cell";
                     
                     [JGActionSheetAlert showAlertWithTitle:@"Title" message:@"Message" cancel:@"Cancel" destructive:@"Destructive" action:^(JGActionSheetAlert * _Nonnull actionSheetAlert, NSInteger actionIndex) {
                         
-                        NSLog(@"Tap button : %zd", actionIndex);
+                        CLog(@"Tap button : %zd", actionIndex);
                     }];
                 }
                     break;
@@ -155,7 +161,7 @@ static NSString * const reuseIdentifier = @"Cell";
                     
                     [JGActionSheetAlert showAlertWithTitle:@"Title" message:@"Message" cancel:@"Cancel" others:@[@"Other 1", @"Other 2"] action:^(JGActionSheetAlert * _Nonnull actionSheetAlert, NSInteger actionIndex) {
                         
-                        NSLog(@"Tap button : %zd", actionIndex);
+                        CLog(@"Tap button : %zd", actionIndex);
                     }];
                 }
                     break;
@@ -164,7 +170,19 @@ static NSString * const reuseIdentifier = @"Cell";
                     
                     [JGActionSheetAlert showAlertWithTitle:@"Title" message:@"Message" cancel:@"Cancel" destructive:@"Destructive" others:@[@"Other 1", @"Other 2"] action:^(JGActionSheetAlert * _Nonnull actionSheetAlert, NSInteger actionIndex) {
                         
-                        NSLog(@"Tap button : %zd", actionIndex);
+                        CLog(@"Tap button : %zd", actionIndex);
+                    }];
+                }
+                    break;
+                    
+                case 6: {
+                    
+                    [JGActionSheetAlert showAlertWithTitle:@"Title" message:@"Message" cancel:@"Cancel" destructive:@"Destructive" others:@[@"Other 1", @"Other 2"] action:^(JGActionSheetAlert * _Nonnull actionSheetAlert, NSInteger actionIndex) {
+                        
+                        [JGActionSheetAlert showAlertWithTitle:@"Title" message:@"Message" cancel:@"Cancel" destructive:@"Destructive" others:@[@"Other 1", @"Other 2"] action:^(JGActionSheetAlert * _Nonnull actionSheetAlert, NSInteger actionIndex) {
+                            
+                            CLog(@"Tap button : %zd", actionIndex);
+                        }];
                     }];
                 }
                     break;
@@ -182,7 +200,7 @@ static NSString * const reuseIdentifier = @"Cell";
                     
                     [JGActionSheetAlert showActionSheetWithTitle:@"Title" cancel:@"Cancel" others:@[@"Action 1", @"Action 2"] action:^(JGActionSheetAlert * _Nonnull actionSheetAlert, NSInteger actionIndex) {
                         
-                        NSLog(@"Tap button : %zd", actionIndex);
+                        CLog(@"Tap button : %zd", actionIndex);
                     }];
                 }
                     break;
@@ -191,7 +209,19 @@ static NSString * const reuseIdentifier = @"Cell";
                     
                     [JGActionSheetAlert showActionSheetWithTitle:@"Title" cancel:@"Cancel" destructive:@"Destructive" others:@[@"Action 1", @"Action 2"] action:^(JGActionSheetAlert * _Nonnull actionSheetAlert, NSInteger actionIndex) {
                         
-                        NSLog(@"Tap button : %zd", actionIndex);
+                        CLog(@"Tap button : %zd", actionIndex);
+                    }];
+                }
+                    break;
+                    
+                case 2: {
+                    
+                    [JGActionSheetAlert showActionSheetWithTitle:@"Title" cancel:@"Cancel" destructive:@"Destructive" others:@[@"Action 1", @"Action 2"] action:^(JGActionSheetAlert * _Nonnull actionSheetAlert, NSInteger actionIndex) {
+                        
+                        [JGActionSheetAlert showAlertWithTitle:@"Title" message:@"Message" cancel:@"Cancel" destructive:@"Destructive" others:@[@"Other 1", @"Other 2"] action:^(JGActionSheetAlert * _Nonnull actionSheetAlert, NSInteger actionIndex) {
+                            
+                            CLog(@"Tap button : %zd", actionIndex);
+                        }];
                     }];
                 }
                     break;
@@ -206,49 +236,5 @@ static NSString * const reuseIdentifier = @"Cell";
             break;
     }
 }
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -40,7 +40,10 @@ nil
     
 }
 
-@property (nonatomic, copy) JGActionSheetAlertAction actionBlock;
+/**
+ iOS7及以下系统action
+ */
+@property (nonatomic, copy) JGActionSheetAlertAction alertAction;
 
 /**
  iOS7及以下系统Alert
@@ -89,40 +92,40 @@ static NSInteger const JGActionSheetAlertFirstOtherIndex = 2;
     return [self showAlertWithTitle:title message:message cancel:cancel ?: @"确定" action:nil];
 }
 
-+ (id)showAlertWithTitle:(NSString *)title message:(NSString *)message cancel:(NSString *)cancel action:(JGActionSheetAlertAction)action {
++ (id)showAlertWithTitle:(NSString *)title message:(NSString *)message cancel:(NSString *)cancel action:(JGActionSheetAlertAction)click {
     
-    return [self showAlertWithTitle:title message:message cancel:cancel ?: @"确定" other:nil action:action];
+    return [self showAlertWithTitle:title message:message cancel:cancel ?: @"确定" other:nil action:click];
 }
 
-+ (id)showAlertWithTitle:(NSString *)title message:(NSString *)message cancel:(NSString *)cancel other:(NSString *)other action:(JGActionSheetAlertAction)action {
++ (id)showAlertWithTitle:(NSString *)title message:(NSString *)message cancel:(NSString *)cancel other:(NSString *)other action:(JGActionSheetAlertAction)click {
     
-    return [self showAlertWithTitle:title message:message cancel:cancel others:[NSArray arrayWithObjects:other, nil] action:action];
+    return [self showAlertWithTitle:title message:message cancel:cancel others:[NSArray arrayWithObjects:other, nil] action:click];
 }
 
-+ (id)showAlertWithTitle:(NSString *)title message:(NSString *)message cancel:(NSString *)cancel destructive:(NSString *)destructive action:(JGActionSheetAlertAction)action {
++ (id)showAlertWithTitle:(NSString *)title message:(NSString *)message cancel:(NSString *)cancel destructive:(NSString *)destructive action:(JGActionSheetAlertAction)click {
     
-    return [self showAlertWithTitle:title message:message cancel:cancel destructive:destructive others:nil action:action];
+    return [self showAlertWithTitle:title message:message cancel:cancel destructive:destructive others:nil action:click];
 }
 
-+ (id)showAlertWithTitle:(NSString *)title message:(NSString *)message cancel:(NSString *)cancel others:(NSArray<NSString *> *)others action:(JGActionSheetAlertAction)action {
++ (id)showAlertWithTitle:(NSString *)title message:(NSString *)message cancel:(NSString *)cancel others:(NSArray<NSString *> *)others action:(JGActionSheetAlertAction)click {
     
-    return [[self sharedInstance] showAlertWithTitle:title message:message cancel:cancel destructive:nil others:others action:action];
+    return [[self sharedInstance] showAlertWithTitle:title message:message cancel:cancel destructive:nil others:others action:click];
 }
 
-+ (id)showAlertWithTitle:(NSString *)title message:(NSString *)message cancel:(NSString *)cancel destructive:(NSString *)destructive others:(NSArray<NSString *> *)others action:(JGActionSheetAlertAction)action {
++ (id)showAlertWithTitle:(NSString *)title message:(NSString *)message cancel:(NSString *)cancel destructive:(NSString *)destructive others:(NSArray<NSString *> *)others action:(JGActionSheetAlertAction)click {
     
-    return [[self sharedInstance] showAlertWithTitle:title message:message cancel:cancel destructive:destructive others:others action:action];
+    return [[self sharedInstance] showAlertWithTitle:title message:message cancel:cancel destructive:destructive others:others action:click];
 }
 
 #pragma mark - ActionSheet
-+ (id)showActionSheetWithTitle:(NSString *)title cancel:(NSString *)cancel others:(NSArray<NSString *> *)others action:(JGActionSheetAlertAction)action {
++ (id)showActionSheetWithTitle:(NSString *)title cancel:(NSString *)cancel others:(NSArray<NSString *> *)others action:(JGActionSheetAlertAction)click {
     
-    return [self showActionSheetWithTitle:title cancel:cancel destructive:nil others:others action:action];
+    return [self showActionSheetWithTitle:title cancel:cancel destructive:nil others:others action:click];
 }
 
-+ (id)showActionSheetWithTitle:(NSString *)title cancel:(NSString *)cancel destructive:(NSString *)destructive others:(NSArray<NSString *> *)others action:(JGActionSheetAlertAction)action {
++ (id)showActionSheetWithTitle:(NSString *)title cancel:(NSString *)cancel destructive:(NSString *)destructive others:(NSArray<NSString *> *)others action:(JGActionSheetAlertAction)click {
     
-    return [[self sharedInstance] showActionSheetWithTitle:title cancel:cancel destructive:destructive others:others action:action];
+    return [[self sharedInstance] showActionSheetWithTitle:title cancel:cancel destructive:destructive others:others action:click];
 }
 
 #pragma mark - init & dealloc
@@ -188,12 +191,12 @@ static NSInteger const JGActionSheetAlertFirstOtherIndex = 2;
 }
 
 /** Alert 区分iOS7及以下与之后系统 */
-- (id)showAlertWithTitle:(NSString *)title message:(NSString *)message cancel:(NSString *)cancel destructive:(NSString *)destructive others:(NSArray<NSString *> *)others action:(JGActionSheetAlertAction)action {
+- (id)showAlertWithTitle:(NSString *)title message:(NSString *)message cancel:(NSString *)cancel destructive:(NSString *)destructive others:(NSArray<NSString *> *)others action:(JGActionSheetAlertAction)click {
     
     title = title ?: @"提示";
     if ([UIAlertController class]) {
         
-        return [self showAlertWithTitle:title message:message style:UIAlertControllerStyleAlert cancel:cancel destructive:destructive others:others action:action];
+        return [self showAlertWithTitle:title message:message style:UIAlertControllerStyleAlert cancel:cancel destructive:destructive others:others action:click];
     }
     else {
         
@@ -204,7 +207,8 @@ static NSInteger const JGActionSheetAlertFirstOtherIndex = 2;
             self.alertView = nil;
         }
         
-        self.actionBlock = action;
+        self.alertAction = click;
+        self.alertDestructiveTitle = nil;
         
         NSMutableArray *tmpOthers = [NSMutableArray arrayWithArray:others];
         if (destructive && ![others containsObject:destructive]) {
@@ -227,11 +231,11 @@ static NSInteger const JGActionSheetAlertFirstOtherIndex = 2;
 }
 
 /** Actionsheet 区分iOS7及以下与之后系统 */
-- (id)showActionSheetWithTitle:(NSString *)title cancel:(NSString *)cancel destructive:(NSString *)destructive others:(NSArray<NSString *> *)others action:(JGActionSheetAlertAction)action {
+- (id)showActionSheetWithTitle:(NSString *)title cancel:(NSString *)cancel destructive:(NSString *)destructive others:(NSArray<NSString *> *)others action:(JGActionSheetAlertAction)click {
     
     if ([UIAlertController class]) {
         
-        return [self showAlertWithTitle:title message:nil style:UIAlertControllerStyleActionSheet cancel:cancel destructive:destructive others:others action:action];
+        return [self showAlertWithTitle:title message:nil style:UIAlertControllerStyleActionSheet cancel:cancel destructive:destructive others:others action:click];
     }
     else {
         
@@ -240,7 +244,7 @@ static NSInteger const JGActionSheetAlertFirstOtherIndex = 2;
             return nil;
         }
         
-        self.actionBlock = action;
+        self.alertAction = click;
         
         UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:title delegate:self cancelButtonTitle:cancel destructiveButtonTitle:destructive otherButtonTitles:JGActionSheetAlertArrayToVa_list(others)];
         [sheet setActionSheetStyle:UIActionSheetStyleAutomatic];
@@ -251,26 +255,21 @@ static NSInteger const JGActionSheetAlertFirstOtherIndex = 2;
 }
 
 /** Alert Actionsheet iOS8及以上系统统一处理 */
-- (UIAlertController *)showAlertWithTitle:(NSString *)title message:(NSString *)message style:(UIAlertControllerStyle)style cancel:(NSString *)cancel destructive:(NSString *)destructive others:(NSArray<NSString *> *)others action:(JGActionSheetAlertAction)action {
+- (UIAlertController *)showAlertWithTitle:(NSString *)title message:(NSString *)message style:(UIAlertControllerStyle)style cancel:(NSString *)cancel destructive:(NSString *)destructive others:(NSArray<NSString *> *)others action:(JGActionSheetAlertAction)click {
     
     UIViewController *topVC = [self applicationTopViewController];
     if (!topVC) {
         return nil;
     }
     
-    self.actionBlock = action;
-    __weak typeof(self) weakSelf = self;
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:style];
     
     if (cancel) {
         
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:cancel style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
             
-            __strong typeof(weakSelf) strongSelf = weakSelf;
-            if (strongSelf.actionBlock) {
-                
-                strongSelf.actionBlock(strongSelf, [strongSelf cancelIndex]);
-                strongSelf.actionBlock = nil;
+            if (click) {
+                click(self, [self cancelIndex]);
             }
         }];
         
@@ -281,11 +280,8 @@ static NSInteger const JGActionSheetAlertFirstOtherIndex = 2;
         
         UIAlertAction *destructiveAction = [UIAlertAction actionWithTitle:destructive style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
             
-            __strong typeof(weakSelf) strongSelf = weakSelf;
-            if (strongSelf.actionBlock) {
-                
-                strongSelf.actionBlock(strongSelf, [strongSelf destructiveIndex]);
-                strongSelf.actionBlock = nil;
+            if (click) {
+                click(self, [self destructiveIndex]);
             }
         }];
         
@@ -296,11 +292,9 @@ static NSInteger const JGActionSheetAlertFirstOtherIndex = 2;
         
         UIAlertAction *otherAction = [UIAlertAction actionWithTitle:others[i] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
-            __strong typeof(weakSelf) strongSelf = weakSelf;
-            if (strongSelf.actionBlock) {
+            if (click) {
                 
-                strongSelf.actionBlock(strongSelf, [strongSelf firstOtherIndex] + i);
-                strongSelf.actionBlock = nil;
+                click(self, [self firstOtherIndex] + i);
             }
         }];
         
@@ -362,13 +356,10 @@ static NSInteger const JGActionSheetAlertFirstOtherIndex = 2;
         actionIndex = JGActionSheetAlertCancelIndex;
     }
     
-    if (self.actionBlock) {
-        
-        self.actionBlock(self, actionIndex);
-        self.actionBlock = nil;
-    }
-    
     self.alertView = nil;
+    if (self.alertAction) {
+        self.alertAction(self, actionIndex);
+    }
 }
 
 #pragma mark - UIActionSheetDelegate
@@ -388,10 +379,9 @@ static NSInteger const JGActionSheetAlertFirstOtherIndex = 2;
         actionIndex = JGActionSheetAlertCancelIndex;
     }
     
-    if (self.actionBlock) {
-        
-        self.actionBlock(self, actionIndex);
-        self.actionBlock = nil;
+    self.alertView = nil;
+    if (self.alertAction) {
+        self.alertAction(self, actionIndex);
     }
 }
 

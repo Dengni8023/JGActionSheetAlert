@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:JGActionSheetAlert.xcodeproj">
+      location = "self:JGActionSheetAlertExample.xcodeproj">
    </FileRef>
 </Workspace>

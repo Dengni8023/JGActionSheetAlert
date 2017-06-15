@@ -1,8 +1,8 @@
 //
 //  main.m
-//  JGActionSheetAlert
+//  JGActionSheetAlertExample
 //
-//  Created by 梅继高 on 2017/5/10.
+//  Created by 梅继高 on 2017/6/15.
 //  Copyright © 2017年 MEETStudio. All rights reserved.
 //
 
