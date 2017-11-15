@@ -1,12 +1,13 @@
 //
 //  AppDelegate.m
-//  JGActionSheetAlert
+//  JGActionSheetAlertDemo
 //
-//  Created by 梅继高 on 2017/5/10.
-//  Copyright © 2017年 MEETStudio. All rights reserved.
+//  Created by Mei Jigao on 2017/11/14.
+//  Copyright © 2017年 MeiJigao. All rights reserved.
 //
 
 #import "AppDelegate.h"
+#import "TableViewController.h"
 
 @interface AppDelegate ()
 
@@ -16,7 +17,15 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
+    _window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    
+    TableViewController *vcT = [[TableViewController alloc] init];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vcT];
+    self.window.rootViewController = nav;
+    
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
 

@@ -1,9 +1,9 @@
 //
 //  AppDelegate.h
-//  JGActionSheetAlert
+//  JGActionSheetAlertDemo
 //
-//  Created by 梅继高 on 2017/5/10.
-//  Copyright © 2017年 MEETStudio. All rights reserved.
+//  Created by Mei Jigao on 2017/11/14.
+//  Copyright © 2017年 MeiJigao. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

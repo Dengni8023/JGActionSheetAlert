@@ -1,17 +1,13 @@
 //
 //  TableViewController.m
-//  JGActionSheetAlert
+//  JGActionSheetAlertDemo
 //
-//  Created by 梅继高 on 2017/5/10.
-//  Copyright © 2017年 MEETStudio. All rights reserved.
+//  Created by Mei Jigao on 2017/11/14.
+//  Copyright © 2017年 MeiJigao. All rights reserved.
 //
 
 #import "TableViewController.h"
 #import "JGActionSheetAlert.h"
-
-#ifndef CLog
-#define CLog(format, ...) (NSLog)((@"%s Line:%zd " format), __PRETTY_FUNCTION__, __LINE__, ## __VA_ARGS__);
-#endif
 
 @interface TableViewController ()
 
@@ -19,10 +15,11 @@
 
 @implementation TableViewController
 
-static NSString * const reuseIdentifier = @"Cell";
-
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.title = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"];
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:JGReuseIdentifier(UITableViewCell)];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -61,7 +58,7 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JGReuseIdentifier(UITableViewCell) forIndexPath:indexPath];
     
     switch (indexPath.section) {
         case 0: {
@@ -132,56 +129,56 @@ static NSString * const reuseIdentifier = @"Cell";
                     
                 case 1: {
                     
-                    [JGActionSheetAlert showAlertWithTitle:@"Title" message:@"Message" cancel:@"Cancel" action:^(JGActionSheetAlert * _Nonnull actionSheetAlert, NSInteger actionIndex) {
-                        
-                        CLog(@"Tap button : %zd", actionIndex);
+                    [JGActionSheetAlert showAlertWithTitle:@"Title" message:@"Message" cancel:@"Cancel" action:^(UIAlertController * _Nonnull alert, NSInteger idx) {
+                        JGLog(@"Tap button : %zd", idx);
                     }];
                 }
                     break;
                     
                 case 2: {
                     
-                    [JGActionSheetAlert showAlertWithTitle:@"Title" message:@"Message" cancel:@"Cancel" other:@"Other" action:^(JGActionSheetAlert * _Nonnull actionSheetAlert, NSInteger actionIndex) {
+                    [JGActionSheetAlert showAlertWithTitle:@"Title" message:@"Message" cancel:@"Cancel" other:@"Other" action:^(UIAlertController * _Nonnull alert, NSInteger idx) {
                         
-                        CLog(@"Tap button : %zd", actionIndex);
+                        JGLog(@"Tap button : %zd", idx);
                     }];
                 }
                     break;
                     
                 case 3: {
                     
-                    [JGActionSheetAlert showAlertWithTitle:@"Title" message:@"Message" cancel:@"Cancel" destructive:@"Destructive" action:^(JGActionSheetAlert * _Nonnull actionSheetAlert, NSInteger actionIndex) {
+                    [JGActionSheetAlert showAlertWithTitle:@"Title" message:@"Message" cancel:@"Cancel" destructive:@"Destructive" action:^(UIAlertController * _Nonnull alert, NSInteger idx) {
                         
-                        CLog(@"Tap button : %zd", actionIndex);
+                        JGLog(@"Tap button : %zd", idx);
                     }];
                 }
                     break;
                     
                 case 4: {
                     
-                    [JGActionSheetAlert showAlertWithTitle:@"Title" message:@"Message" cancel:@"Cancel" others:@[@"Other 1", @"Other 2"] action:^(JGActionSheetAlert * _Nonnull actionSheetAlert, NSInteger actionIndex) {
+                    [JGActionSheetAlert showAlertWithTitle:@"Title" message:@"Message" cancel:@"Cancel" others:@[@"Other 1", @"Other 2"] action:^(UIAlertController * _Nonnull alert, NSInteger idx) {
                         
-                        CLog(@"Tap button : %zd", actionIndex);
+                        JGLog(@"Tap button : %zd", idx);
                     }];
                 }
                     break;
                     
                 case 5: {
                     
-                    [JGActionSheetAlert showAlertWithTitle:@"Title" message:@"Message" cancel:@"Cancel" destructive:@"Destructive" others:@[@"Other 1", @"Other 2"] action:^(JGActionSheetAlert * _Nonnull actionSheetAlert, NSInteger actionIndex) {
+                    [JGActionSheetAlert showAlertWithTitle:@"Title" message:@"Message" cancel:@"Cancel" destructive:@"Destructive" others:@[@"Other 1", @"Other 2"] action:^(UIAlertController * _Nonnull alert, NSInteger idx) {
                         
-                        CLog(@"Tap button : %zd", actionIndex);
+                        JGLog(@"Tap button : %zd", idx);
                     }];
                 }
                     break;
                     
                 case 6: {
                     
-                    [JGActionSheetAlert showAlertWithTitle:@"Title" message:@"Message" cancel:@"Cancel" destructive:@"Destructive" others:@[@"Other 1", @"Other 2"] action:^(JGActionSheetAlert * _Nonnull actionSheetAlert, NSInteger actionIndex) {
+                    [JGActionSheetAlert showAlertWithTitle:@"Title" message:@"Message" cancel:@"Cancel" destructive:@"Destructive" others:@[@"Other 1", @"Other 2"] action:^(UIAlertController * _Nonnull alert, NSInteger idx) {
                         
-                        [JGActionSheetAlert showAlertWithTitle:@"Title" message:@"Message" cancel:@"Cancel" destructive:@"Destructive" others:@[@"Other 1", @"Other 2"] action:^(JGActionSheetAlert * _Nonnull actionSheetAlert, NSInteger actionIndex) {
+                        JGLog(@"Tap button : %zd", idx);
+                        [JGActionSheetAlert showAlertWithTitle:@"Inner Title" message:@"Inner Message" cancel:@"Cancel" destructive:@"Destructive" others:@[@"Other 1", @"Other 2"] action:^(UIAlertController * _Nonnull alert, NSInteger idx) {
                             
-                            CLog(@"Tap button : %zd", actionIndex);
+                            JGLog(@"Tap button : %zd", idx);
                         }];
                     }];
                 }
@@ -198,29 +195,30 @@ static NSString * const reuseIdentifier = @"Cell";
             switch (indexPath.row) {
                 case 0: {
                     
-                    [JGActionSheetAlert showActionSheetWithTitle:@"Title" cancel:@"Cancel" others:@[@"Action 1", @"Action 2"] action:^(JGActionSheetAlert * _Nonnull actionSheetAlert, NSInteger actionIndex) {
+                    [JGActionSheetAlert showActionSheetWithTitle:@"Title" cancel:@"Cancel" others:@[@"Action 1", @"Action 2"] action:^(UIAlertController * _Nonnull alert, NSInteger idx) {
                         
-                        CLog(@"Tap button : %zd", actionIndex);
+                        JGLog(@"Tap button : %zd", idx);
                     }];
                 }
                     break;
                     
                 case 1: {
                     
-                    [JGActionSheetAlert showActionSheetWithTitle:@"Title" cancel:@"Cancel" destructive:@"Destructive" others:@[@"Action 1", @"Action 2"] action:^(JGActionSheetAlert * _Nonnull actionSheetAlert, NSInteger actionIndex) {
+                    [JGActionSheetAlert showActionSheetWithTitle:@"Title" cancel:@"Cancel" destructive:@"Destructive" others:@[@"Action 1", @"Action 2"] action:^(UIAlertController * _Nonnull alert, NSInteger idx) {
                         
-                        CLog(@"Tap button : %zd", actionIndex);
+                        JGLog(@"Tap button : %zd", idx);
                     }];
                 }
                     break;
                     
                 case 2: {
                     
-                    [JGActionSheetAlert showActionSheetWithTitle:@"Title" cancel:@"Cancel" destructive:@"Destructive" others:@[@"Action 1", @"Action 2"] action:^(JGActionSheetAlert * _Nonnull actionSheetAlert, NSInteger actionIndex) {
+                    [JGActionSheetAlert showActionSheetWithTitle:@"Title" cancel:@"Cancel" destructive:@"Destructive" others:@[@"Action 1", @"Action 2"] action:^(UIAlertController * _Nonnull alert, NSInteger idx) {
                         
-                        [JGActionSheetAlert showAlertWithTitle:@"Title" message:@"Message" cancel:@"Cancel" destructive:@"Destructive" others:@[@"Other 1", @"Other 2"] action:^(JGActionSheetAlert * _Nonnull actionSheetAlert, NSInteger actionIndex) {
+                        JGLog(@"Tap button : %zd", idx);
+                        [JGActionSheetAlert showAlertWithTitle:@"Inner Title" message:@"Inner Message" cancel:@"Cancel" destructive:@"Destructive" others:@[@"Other 1", @"Other 2"] action:^(UIAlertController * _Nonnull alert, NSInteger idx) {
                             
-                            CLog(@"Tap button : %zd", actionIndex);
+                            JGLog(@"Tap button : %zd", idx);
                         }];
                     }];
                 }
